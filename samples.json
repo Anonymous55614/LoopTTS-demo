@@ -67,7 +67,28 @@
       "type": "refinement",
       "samples": [
         {
-          "id": "ref-1",
+          "id": "home_gpt4o_14121_fearful_coral",
+          "text": "I've told you 100 times—don't open the door at night.",
+          "instruction": "Speak with a Fearful emotion. Specifically, stress the word '100', insert a pause after 'times', stress the word 'don't', and stress the word 'night'.",
+          "before_audio": "samples/refine/1_before.wav",
+          "after_audio": "samples/refine/1_after.wav"
+        },
+        {
+          "id": "home_gpt4o_9966_sad_ash",
+          "text": "The letter slipped from his grasp, a paper cut of bitter news.",
+          "instruction": "Speak with a Sad emotion at a slow speed and low pitch. Specifically, stress the word 'slipped', insert a pause after 'grasp', and stress the word 'bitter'.",
+          "before_audio": "samples/refine/2_before.wav",
+          "after_audio": "samples/refine/2_after.wav"
+        },
+        {
+          "id": "home_gpt4o_523_angry_ash",
+          "text": "The car door slammed shut, punctuating the end of the argument.",
+          "instruction": "Speak with a Angry emotion. Specifically, stress the word 'slammed', stress the word 'shut', insert a pause after 'shut', and stress the word 'argument'.",
+          "before_audio": "samples/refine/9_before.wav",
+          "after_audio": "samples/refine/9_after.wav"
+        },        
+        {
+          "id": "5044_5044_30602_000045_000000",
           "text": "I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something.",
           "instruction": "Specifically, stress the word 'just', stress the word 'vexed', and insert a pause after 'Anne'.",
           "before_audio": "samples/refine/ref1_before.wav",
