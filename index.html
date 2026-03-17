@@ -14,6 +14,8 @@
             --text-secondary: #64748b;
             --border: #e2e8f0;
             --accent: #f59e0b;
+            --green: #10b981;
+            --red: #ef4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +28,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -45,9 +47,7 @@
             margin-bottom: 8px;
         }
 
-        header h1 span {
-            color: var(--accent);
-        }
+        header h1 span { color: var(--accent); }
 
         header .subtitle {
             font-size: 1.1rem;
@@ -107,9 +107,7 @@
         }
 
         /* Sections */
-        section {
-            margin: 40px 0;
-        }
+        section { margin: 40px 0; }
 
         section > h2 {
             font-size: 1.5rem;
@@ -131,54 +129,55 @@
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 20px 24px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
 
-        .sample-block .sample-header {
-            margin-bottom: 12px;
-        }
-
-        .sample-block .sample-id {
+        .sample-id {
             font-weight: 700;
             color: var(--primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .sample-block .sample-text {
+        .sample-text {
             font-style: italic;
             color: var(--text);
-            margin: 4px 0;
+            margin: 6px 0;
             font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        .sample-block .sample-instruction {
+        .sample-instruction {
             background: #fef3c7;
             border-left: 3px solid var(--accent);
             padding: 8px 12px;
-            margin: 8px 0 12px;
+            margin: 8px 0 14px;
             font-size: 0.88rem;
             color: #92400e;
             border-radius: 0 6px 6px 0;
         }
 
-        .sample-block .sample-instruction strong {
-            color: #78350f;
-        }
+        .sample-instruction strong { color: #78350f; }
 
-        /* Audio grid */
-        .audio-grid {
+        /* Audio row */
+        .audio-row {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 10px;
         }
 
-        .audio-item {
-            text-align: center;
+        .audio-row.single {
+            grid-template-columns: 1fr;
+            max-width: 480px;
         }
+
+        .audio-item { text-align: center; }
 
         .audio-item .label {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-secondary);
             margin-bottom: 4px;
@@ -186,28 +185,41 @@
             letter-spacing: 0.5px;
         }
 
+        .audio-item .label.before { color: var(--red); }
+        .audio-item .label.after { color: var(--green); }
+
         .audio-item audio {
             width: 100%;
             height: 36px;
         }
 
-        /* Iterative refinement: horizontal flow */
-        .iterative-flow {
+        /* Refinement arrow */
+        .refine-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
         }
 
-        .iterative-flow .audio-item {
-            flex: 1;
-            min-width: 160px;
-        }
+        .refine-row .audio-item { flex: 1; }
 
-        .iterative-flow .arrow {
-            font-size: 1.4rem;
+        .refine-row .arrow {
+            font-size: 1.6rem;
             color: var(--primary);
             font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Placeholder notice */
+        .placeholder-notice {
+            background: #fef2f2;
+            border: 1px dashed #fca5a5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #991b1b;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         /* Footer */
@@ -220,10 +232,11 @@
             margin-top: 48px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 1.6rem; }
-            .audio-grid { grid-template-columns: repeat(2, 1fr); }
+            .audio-row { grid-template-columns: 1fr; }
+            .refine-row { flex-direction: column; }
+            .refine-row .arrow { transform: rotate(90deg); }
         }
     </style>
 </head>
@@ -246,213 +259,95 @@
     <div class="abstract">
         <h2>Abstract</h2>
         <p>
-            Current TTS systems adopt an open-loop, single-pass generation paradigm, inevitably producing sporadic local prosodic defects that conventional utterance-level metrics cannot detect. We present <strong>LoopTTS</strong>, a TTS system that places an AudioLLM Judge at its core and orchestrates two functionally complementary TTS models in a closed-loop Filter–Judge–Refiner architecture. A base TTS model produces an initial utterance; the Judge localizes word-level prosodic anomalies and generates structured refine instructions; a Refiner executes the instructions conditioned on the initial utterance. Experiments show that LoopTTS substantially improves prosodic naturalness through multi-round iterative refinement, bringing test-time compute scaling to TTS for the first time.
+            Current TTS systems adopt an open-loop, single-pass generation paradigm, inevitably producing sporadic local prosodic defects that conventional utterance-level metrics cannot detect. We present <strong>LoopTTS</strong>, a closed-loop TTS system that places an AudioLLM Judge at its core and orchestrates two functionally complementary TTS models in a Filter–Judge–Refiner architecture. The Judge localizes word-level prosodic anomalies and generates structured refine instructions; a Refiner executes the instructions conditioned on the initial utterance for targeted prosodic correction.
         </p>
     </div>
 
     <!-- ============================================ -->
-    <!-- Section 1: Pipeline Evaluation -->
+    <!-- Section 1: Emotion Control -->
     <!-- ============================================ -->
     <section>
-        <h2>1. Pipeline Evaluation</h2>
+        <h2>1. Emotion Control</h2>
         <p class="section-desc">
-            Comparison of the full LoopTTS pipeline against open-loop re-generation baselines under Neutral and Emotional conditions.
-            All samples were flagged by the AudioLLM Judge (score &lt; 5) before refinement.
+            LoopTTS generates speech with target emotional expression guided by prosodic instructions. Each sample shows the neutral speaker prompt and the emotionally expressive output.
         </p>
 
-        <!-- Neutral samples -->
-        <h3 style="color: var(--text-secondary); margin: 16px 0 12px; font-size: 1.1rem;">Neutral</h3>
+        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/emotion/</code> and update <code>samples.json</code>.</div>
 
-        <div class="sample-block">
-            <div class="sample-header">
-                <span class="sample-id">Sample N-1</span>
-                <p class="sample-text">"[Your sample text here]"</p>
-            </div>
-            <div class="audio-grid">
-                <div class="audio-item">
-                    <div class="label">Before Refinement</div>
-                    <audio controls src="samples/pipeline/neutral/n1_before.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">CosyVoice2 Re-gen</div>
-                    <audio controls src="samples/pipeline/neutral/n1_cosyvoice2.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">EmoVoice Re-gen</div>
-                    <audio controls src="samples/pipeline/neutral/n1_emovoice.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">1-Round Refine</div>
-                    <audio controls src="samples/pipeline/neutral/n1_1round.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">2-Round Refine</div>
-                    <audio controls src="samples/pipeline/neutral/n1_2round.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">Human Instruction</div>
-                    <audio controls src="samples/pipeline/neutral/n1_human.wav"></audio>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add more neutral samples by duplicating the sample-block above -->
-
-        <!-- Emotional samples -->
-        <h3 style="color: var(--text-secondary); margin: 16px 0 12px; font-size: 1.1rem;">Emotional</h3>
-
-        <div class="sample-block">
-            <div class="sample-header">
-                <span class="sample-id">Sample E-1</span>
-                <p class="sample-text">"[Your sample text here]"</p>
-                <div class="sample-instruction"><strong>Emotion:</strong> Happy</div>
-            </div>
-            <div class="audio-grid">
-                <div class="audio-item">
-                    <div class="label">Before Refinement</div>
-                    <audio controls src="samples/pipeline/emotional/e1_before.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">CosyVoice2 Re-gen</div>
-                    <audio controls src="samples/pipeline/emotional/e1_cosyvoice2.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">EmoVoice Re-gen</div>
-                    <audio controls src="samples/pipeline/emotional/e1_emovoice.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">1-Round Refine</div>
-                    <audio controls src="samples/pipeline/emotional/e1_1round.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">2-Round Refine</div>
-                    <audio controls src="samples/pipeline/emotional/e1_2round.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">Human Instruction</div>
-                    <audio controls src="samples/pipeline/emotional/e1_human.wav"></audio>
-                </div>
-            </div>
-        </div>
+        <!-- SAMPLES WILL GO HERE -->
 
     </section>
 
     <!-- ============================================ -->
-    <!-- Section 2: Instruction-Following Comparison -->
+    <!-- Section 2: Global Prosody (Speed & Pitch) -->
     <!-- ============================================ -->
     <section>
-        <h2>2. Instruction-Following Comparison</h2>
+        <h2>2. Global Prosody (Speed &amp; Pitch)</h2>
         <p class="section-desc">
-            All models receive the same prosodic refine instruction. The Refiner additionally conditions on the initial utterance for targeted modification.
+            LoopTTS controls global prosodic attributes including speaking speed and pitch level.
         </p>
 
-        <div class="sample-block">
-            <div class="sample-header">
-                <span class="sample-id">Sample I-1</span>
-                <p class="sample-text">"[Your sample text here]"</p>
-                <div class="sample-instruction">
-                    <strong>Instruction:</strong> Speak with a happy tone at moderate speed. Emphasize "world" and "beautiful". Pause after "hello".
-                </div>
-            </div>
-            <div class="audio-grid">
-                <div class="audio-item">
-                    <div class="label">CosyVoice2</div>
-                    <audio controls src="samples/instruction/i1_cosyvoice2.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">CosyVoice2-Marker</div>
-                    <audio controls src="samples/instruction/i1_marker.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">EmoVoice</div>
-                    <audio controls src="samples/instruction/i1_emovoice.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">Refiner (Ours)</div>
-                    <audio controls src="samples/instruction/i1_refiner.wav"></audio>
-                </div>
-            </div>
-        </div>
+        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/global/</code> and update <code>samples.json</code>.</div>
+
+        <!-- SAMPLES WILL GO HERE -->
 
     </section>
 
     <!-- ============================================ -->
-    <!-- Section 3: Iterative Refinement -->
+    <!-- Section 3: Word-Level Stress -->
     <!-- ============================================ -->
     <section>
-        <h2>3. Iterative Refinement Process</h2>
+        <h2>3. Word-Level Stress</h2>
         <p class="section-desc">
-            Demonstrating the multi-round refinement process: the AudioLLM Judge diagnoses prosodic defects at each round and the Refiner progressively corrects them.
+            LoopTTS places emphasis on specific words as directed by the refine instruction.
         </p>
 
-        <div class="sample-block">
-            <div class="sample-header">
-                <span class="sample-id">Sample R-1</span>
-                <p class="sample-text">"[Your sample text here]"</p>
-            </div>
+        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/stress/</code> and update <code>samples.json</code>.</div>
 
-            <div class="sample-instruction" style="margin-bottom: 4px;">
-                <strong>Round 1 Diagnosis:</strong> Score 3/10. Stress missing on "important". No pause after "however". Emotion too flat.
-            </div>
-            <div class="sample-instruction" style="border-left-color: #f97316; background: #fff7ed;">
-                <strong>Round 2 Diagnosis:</strong> Score 4/10. Stress on "important" improved. Pause still too short after "however".
-            </div>
-
-            <div style="margin-top: 16px;">
-                <div class="iterative-flow">
-                    <div class="audio-item">
-                        <div class="label">Initial (Score: 3)</div>
-                        <audio controls src="samples/pipeline/neutral/r1_round0.wav"></audio>
-                    </div>
-                    <span class="arrow">→</span>
-                    <div class="audio-item">
-                        <div class="label">Round 1 (Score: 4)</div>
-                        <audio controls src="samples/pipeline/neutral/r1_round1.wav"></audio>
-                    </div>
-                    <span class="arrow">→</span>
-                    <div class="audio-item">
-                        <div class="label">Round 2 (Score: 7)</div>
-                        <audio controls src="samples/pipeline/neutral/r1_round2.wav"></audio>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- SAMPLES WILL GO HERE -->
 
     </section>
 
     <!-- ============================================ -->
-    <!-- Section 4: Ablation -->
+    <!-- Section 4: Pause Insertion -->
     <!-- ============================================ -->
     <section>
-        <h2>4. Ablation: Effect of Loss Components</h2>
+        <h2>4. Pause Insertion</h2>
         <p class="section-desc">
-            Comparing the full Refiner against ablated variants to isolate the contribution of Position-Weighted CE and Structural Alignment losses.
+            LoopTTS inserts deliberate pauses at specified positions to improve prosodic phrasing.
         </p>
 
+        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/pause/</code> and update <code>samples.json</code>.</div>
+
+        <!-- SAMPLES WILL GO HERE -->
+
+    </section>
+
+    <!-- ============================================ -->
+    <!-- Section 5: Refinement with Instruction -->
+    <!-- ============================================ -->
+    <section>
+        <h2>5. Refinement with Instruction</h2>
+        <p class="section-desc">
+            LoopTTS refines a prosodically defective utterance using a structured refine instruction from the AudioLLM Judge, producing corrected speech while preserving speaker identity.
+        </p>
+
+        <!-- Sample ref-1 -->
         <div class="sample-block">
-            <div class="sample-header">
-                <span class="sample-id">Sample A-1</span>
-                <p class="sample-text">"[Your sample text here]"</p>
-                <div class="sample-instruction">
-                    <strong>Instruction:</strong> Emphasize "never" and "always". Pause after "but".
-                </div>
+            <span class="sample-id">Sample ref-1</span>
+            <p class="sample-text">"I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something."</p>
+            <div class="sample-instruction">
+                <strong>Refine Instruction:</strong> Specifically, stress the word 'just', stress the word 'vexed', and insert a pause after 'Anne'.
             </div>
-            <div class="audio-grid">
+            <div class="refine-row">
                 <div class="audio-item">
-                    <div class="label">Full Refiner</div>
-                    <audio controls src="samples/ablation/a1_full.wav"></audio>
+                    <div class="label before">Before Refinement</div>
+                    <audio controls src="samples/refine/ref1_before.wav"></audio>
                 </div>
+                <span class="arrow">→</span>
                 <div class="audio-item">
-                    <div class="label">w/o L_struct</div>
-                    <audio controls src="samples/ablation/a1_no_struct.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">w/o Pos-Weight</div>
-                    <audio controls src="samples/ablation/a1_no_pw.wav"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">w/o Both</div>
-                    <audio controls src="samples/ablation/a1_no_both.wav"></audio>
+                    <div class="label after">After Refinement</div>
+                    <audio controls src="samples/refine/ref1_after.wav"></audio>
                 </div>
             </div>
         </div>
