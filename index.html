@@ -161,7 +161,7 @@
 
         .sample-instruction strong { color: #78350f; }
 
-        /* Audio row */
+        /* Audio row for generation type */
         .audio-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -193,7 +193,7 @@
             height: 36px;
         }
 
-        /* Refinement arrow */
+        /* Refinement arrow layout */
         .refine-row {
             display: flex;
             align-items: center;
@@ -221,6 +221,27 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .loading .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Footer */
         footer {
@@ -263,102 +284,153 @@
         </p>
     </div>
 
-    <!-- ============================================ -->
-    <!-- Section 1: Emotion Control -->
-    <!-- ============================================ -->
-    <section>
-        <h2>1. Emotion Control</h2>
-        <p class="section-desc">
-            LoopTTS generates speech with target emotional expression guided by prosodic instructions. Each sample shows the neutral speaker prompt and the emotionally expressive output.
-        </p>
-
-        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/emotion/</code> and update <code>samples.json</code>.</div>
-
-        <!-- SAMPLES WILL GO HERE -->
-
-    </section>
-
-    <!-- ============================================ -->
-    <!-- Section 2: Global Prosody (Speed & Pitch) -->
-    <!-- ============================================ -->
-    <section>
-        <h2>2. Global Prosody (Speed &amp; Pitch)</h2>
-        <p class="section-desc">
-            LoopTTS controls global prosodic attributes including speaking speed and pitch level.
-        </p>
-
-        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/global/</code> and update <code>samples.json</code>.</div>
-
-        <!-- SAMPLES WILL GO HERE -->
-
-    </section>
-
-    <!-- ============================================ -->
-    <!-- Section 3: Word-Level Stress -->
-    <!-- ============================================ -->
-    <section>
-        <h2>3. Word-Level Stress</h2>
-        <p class="section-desc">
-            LoopTTS places emphasis on specific words as directed by the refine instruction.
-        </p>
-
-        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/stress/</code> and update <code>samples.json</code>.</div>
-
-        <!-- SAMPLES WILL GO HERE -->
-
-    </section>
-
-    <!-- ============================================ -->
-    <!-- Section 4: Pause Insertion -->
-    <!-- ============================================ -->
-    <section>
-        <h2>4. Pause Insertion</h2>
-        <p class="section-desc">
-            LoopTTS inserts deliberate pauses at specified positions to improve prosodic phrasing.
-        </p>
-
-        <div class="placeholder-notice">⚠️ Audio samples coming soon — add WAV files to <code>samples/pause/</code> and update <code>samples.json</code>.</div>
-
-        <!-- SAMPLES WILL GO HERE -->
-
-    </section>
-
-    <!-- ============================================ -->
-    <!-- Section 5: Refinement with Instruction -->
-    <!-- ============================================ -->
-    <section>
-        <h2>5. Refinement with Instruction</h2>
-        <p class="section-desc">
-            LoopTTS refines a prosodically defective utterance using a structured refine instruction from the AudioLLM Judge, producing corrected speech while preserving speaker identity.
-        </p>
-
-        <!-- Sample ref-1 -->
-        <div class="sample-block">
-            <span class="sample-id">Sample ref-1</span>
-            <p class="sample-text">"I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something."</p>
-            <div class="sample-instruction">
-                <strong>Refine Instruction:</strong> Specifically, stress the word 'just', stress the word 'vexed', and insert a pause after 'Anne'.
-            </div>
-            <div class="refine-row">
-                <div class="audio-item">
-                    <div class="label before">Before Refinement</div>
-                    <audio controls src="samples/refine/ref1_before.wav"></audio>
-                </div>
-                <span class="arrow">→</span>
-                <div class="audio-item">
-                    <div class="label after">After Refinement</div>
-                    <audio controls src="samples/refine/ref1_after.wav"></audio>
-                </div>
-            </div>
+    <!-- Dynamic content loads here -->
+    <div id="content">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading samples...</p>
         </div>
-
-    </section>
+    </div>
 
 </div>
 
 <footer>
     <p>LoopTTS Demo Page — Anonymous Submission</p>
 </footer>
+
+<script>
+(function() {
+    const SECTION_TITLES = {
+        'emotion':  'Emotion Control',
+        'global':   'Global Prosody (Speed & Pitch)',
+        'stress':   'Word-Level Stress',
+        'pause':    'Pause Insertion',
+        'refine':   'Refinement with Instruction'
+    };
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function renderGenerationSample(sample) {
+        const block = document.createElement('div');
+        block.className = 'sample-block';
+
+        let html = `
+            <span class="sample-id">Sample ${escapeHtml(sample.id)}</span>
+            <p class="sample-text">"${escapeHtml(sample.text)}"</p>
+            <div class="sample-instruction">
+                <strong>Instruction:</strong> ${escapeHtml(sample.instruction)}
+            </div>
+            <div class="audio-row">
+                <div class="audio-item">
+                    <div class="label">Prompt Speech</div>
+                    <audio controls preload="none" src="${escapeHtml(sample.prompt_audio)}"></audio>
+                </div>
+                <div class="audio-item">
+                    <div class="label">Output</div>
+                    <audio controls preload="none" src="${escapeHtml(sample.output_audio)}"></audio>
+                </div>
+            </div>
+        `;
+
+        block.innerHTML = html;
+        return block;
+    }
+
+    function renderRefinementSample(sample) {
+        const block = document.createElement('div');
+        block.className = 'sample-block';
+
+        let html = `
+            <span class="sample-id">Sample ${escapeHtml(sample.id)}</span>
+            <p class="sample-text">"${escapeHtml(sample.text)}"</p>
+            <div class="sample-instruction">
+                <strong>Refine Instruction:</strong> ${escapeHtml(sample.instruction)}
+            </div>
+            <div class="refine-row">
+                <div class="audio-item">
+                    <div class="label before">Before Refinement</div>
+                    <audio controls preload="none" src="${escapeHtml(sample.before_audio)}"></audio>
+                </div>
+                <span class="arrow">→</span>
+                <div class="audio-item">
+                    <div class="label after">After Refinement</div>
+                    <audio controls preload="none" src="${escapeHtml(sample.after_audio)}"></audio>
+                </div>
+            </div>
+        `;
+
+        block.innerHTML = html;
+        return block;
+    }
+
+    function renderCategory(category, index) {
+        const section = document.createElement('section');
+
+        const title = SECTION_TITLES[category.id] || category.title;
+        section.innerHTML = `
+            <h2>${index + 1}. ${escapeHtml(title)}</h2>
+            <p class="section-desc">${escapeHtml(category.description)}</p>
+        `;
+
+        const samples = category.samples || [];
+
+        // Check if samples are placeholder
+        const hasReal = samples.some(s => {
+            if (category.type === 'refinement') {
+                return s.before_audio && !s.before_audio.includes('[');
+            } else {
+                return s.output_audio && !s.output_audio.includes('[');
+            }
+        });
+
+        if (samples.length === 0 || !hasReal) {
+            const notice = document.createElement('div');
+            notice.className = 'placeholder-notice';
+            const folder = category.id === 'global' ? 'global' : category.id;
+            notice.innerHTML = `⚠️ Audio samples coming soon — add WAV files to <code>samples/${folder}/</code> and update <code>samples.json</code>.`;
+            section.appendChild(notice);
+        } else {
+            samples.forEach(sample => {
+                if (category.type === 'refinement') {
+                    section.appendChild(renderRefinementSample(sample));
+                } else {
+                    section.appendChild(renderGenerationSample(sample));
+                }
+            });
+        }
+
+        return section;
+    }
+
+    // Load samples.json and render
+    fetch('samples.json')
+        .then(r => {
+            if (!r.ok) throw new Error('Failed to load samples.json');
+            return r.json();
+        })
+        .then(data => {
+            const container = document.getElementById('content');
+            container.innerHTML = '';
+
+            (data.categories || []).forEach((cat, i) => {
+                container.appendChild(renderCategory(cat, i));
+            });
+        })
+        .catch(err => {
+            const container = document.getElementById('content');
+            container.innerHTML = `
+                <div class="placeholder-notice">
+                    ⚠️ Failed to load samples: ${escapeHtml(err.message)}
+                </div>
+            `;
+            console.error(err);
+        });
+})();
+</script>
 
 </body>
 </html>
