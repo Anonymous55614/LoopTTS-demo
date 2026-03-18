@@ -6,6 +6,7 @@
       "description": "Given the same neutral text and an emotional speech prompt, the Refiner produces speech that simultaneously realizes the target emotion and applies fine-grained prosodic edits (word-level stress or pause insertion).",
       "type": "emosp_table",
       "text": "Listen closely, the same words can tell a very different story.",
+      "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
       "controls": [
         {"id": "stress_same", "label": "Stress \"same\"", "short": "Stress: same"},
         {"id": "stress_very", "label": "Stress \"very\"", "short": "Stress: very"},
@@ -40,7 +41,7 @@
         },
         "happy": {
           "stress_same": "samples/emosp/emosp_stress_same_happy_p00_r4.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_happy_p00_r1.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_happy_p00_r2.wav",
           "pause_words": "samples/emosp/emosp_pause_after-words_happy_p00_r1.wav",
           "pause_different": "samples/emosp/emosp_pause_after-different_happy_p00_r0.wav"
         },

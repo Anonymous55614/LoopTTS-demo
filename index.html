@@ -228,6 +228,16 @@
             <div class="target-text">${escapeHtml(category.text)}</div>
         `;
 
+        if (category.initial_audio) {
+            const initDiv = document.createElement('div');
+            initDiv.style.cssText = 'background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:16px;';
+            initDiv.innerHTML = `
+                <span style="font-weight:600;color:var(--text-secondary);font-size:0.9rem;white-space:nowrap;">Initial Utterance</span>
+                <audio controls preload="none" src="${escapeHtml(category.initial_audio)}" style="flex:1;height:36px;"></audio>
+            `;
+            section.appendChild(initDiv);
+        }
+
         const wrap = document.createElement('div');
         wrap.className = 'emosp-table-wrap';
 
