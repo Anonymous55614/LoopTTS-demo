@@ -28,7 +28,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -41,218 +41,137 @@
             text-align: center;
         }
 
-        header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
+        header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
         header h1 span { color: var(--accent); }
-
-        header .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto 20px;
-        }
+        header .subtitle { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto 20px; }
 
         header .links a {
-            display: inline-block;
-            margin: 0 8px;
-            padding: 8px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            display: inline-block; margin: 0 8px; padding: 8px 20px;
+            border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s;
         }
-
-        header .links a.paper {
-            background: white;
-            color: var(--primary);
-        }
-
-        header .links a.code {
-            background: rgba(255,255,255,0.15);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
+        header .links a.paper { background: white; color: var(--primary); }
+        header .links a.code { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
         header .links a:hover { transform: translateY(-1px); }
 
         /* Abstract */
         .abstract {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin: -24px auto 32px;
-            max-width: 900px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+            padding: 28px 32px; margin: -24px auto 32px; max-width: 900px;
+            position: relative; z-index: 1; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
-
-        .abstract h2 {
-            font-size: 1rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .abstract p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
+        .abstract h2 { font-size: 1rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .abstract p { font-size: 0.95rem; color: var(--text-secondary); }
 
         /* Sections */
         section { margin: 40px 0; }
+        section > h2 { font-size: 1.5rem; color: var(--text); border-bottom: 3px solid var(--primary); padding-bottom: 8px; margin-bottom: 8px; }
+        section > p.section-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; }
 
-        section > h2 {
-            font-size: 1.5rem;
-            color: var(--text);
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 8px;
-            margin-bottom: 8px;
+        /* Text display */
+        .target-text {
+            background: var(--primary-light); border-radius: 8px; padding: 12px 16px;
+            margin-bottom: 20px; font-size: 1.05rem; color: var(--text); font-style: italic;
         }
+        .target-text::before { content: '\201C'; color: var(--primary); font-weight: 700; font-size: 1.2em; }
+        .target-text::after  { content: '\201D'; color: var(--primary); font-weight: 700; font-size: 1.2em; }
 
-        section > p.section-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        /* EMOSP Table */
+        .emosp-table-wrap {
+            overflow-x: auto;
             margin-bottom: 24px;
         }
-
-        /* Sample block */
-        .sample-block {
+        .emosp-table {
+            width: 100%;
+            border-collapse: collapse;
             background: var(--card-bg);
-            border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 20px 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .emosp-table th, .emosp-table td {
+            padding: 10px 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .emosp-table thead th {
+            background: linear-gradient(135deg, #1e3a5f, #2563eb);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .emosp-table thead th:first-child {
+            background: #1e3a5f;
+        }
+        .emosp-table tbody th {
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 90px;
+            text-transform: capitalize;
+        }
+        .emosp-table td audio {
+            width: 100%;
+            min-width: 160px;
+            height: 32px;
         }
 
-        .sample-text {
-            color: var(--text);
-            margin: 0 0 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 1.5;
+        /* Emotion color badges */
+        .emo-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
         }
+        .emo-neutral    { background: #f1f5f9; color: #64748b; }
+        .emo-angry      { background: #fef2f2; color: #dc2626; }
+        .emo-disgusted  { background: #faf5ff; color: #9333ea; }
+        .emo-fearful    { background: #f0f9ff; color: #0369a1; }
+        .emo-happy      { background: #fffbeb; color: #d97706; }
+        .emo-sad        { background: #eff6ff; color: #2563eb; }
+        .emo-surprised  { background: #ecfdf5; color: #059669; }
 
+        /* Refinement samples */
+        .sample-block {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+            padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+        .sample-text { color: var(--text); margin: 0 0 8px; font-size: 1rem; font-weight: 500; line-height: 1.5; }
         .sample-text::before { content: '\201C'; color: var(--primary); font-weight: 700; }
         .sample-text::after  { content: '\201D'; color: var(--primary); font-weight: 700; }
 
         .sample-instruction {
-            background: #fef3c7;
-            border-left: 3px solid var(--accent);
-            padding: 8px 12px;
-            margin: 0 0 14px;
-            font-size: 0.88rem;
-            color: #92400e;
-            border-radius: 0 6px 6px 0;
+            background: #fef3c7; border-left: 3px solid var(--accent);
+            padding: 8px 12px; margin: 0 0 14px; font-size: 0.88rem; color: #92400e; border-radius: 0 6px 6px 0;
         }
-
         .sample-instruction strong { color: #78350f; }
 
-        /* Audio row for generation type */
-        .audio-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 10px;
-        }
-
-        .audio-row.single {
-            grid-template-columns: 1fr;
-            max-width: 480px;
-        }
-
         .audio-item { text-align: center; }
-
-        .audio-item .label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
+        .audio-item .label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
         .audio-item .label.before { color: var(--red); }
         .audio-item .label.after { color: var(--green); }
+        .audio-item audio { width: 100%; height: 36px; }
 
-        .audio-item audio {
-            width: 100%;
-            height: 36px;
-        }
-
-        /* Refinement arrow layout */
-        .refine-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
+        .refine-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
         .refine-row .audio-item { flex: 1; }
+        .refine-row .arrow { font-size: 1.6rem; color: var(--primary); font-weight: 700; flex-shrink: 0; }
 
-        .refine-row .arrow {
-            font-size: 1.6rem;
-            color: var(--primary);
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        /* Placeholder notice */
-        .placeholder-notice {
-            background: #fef2f2;
-            border: 1px dashed #fca5a5;
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: #991b1b;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Loading state */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .loading .spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 12px;
-        }
-
+        /* Loading */
+        .loading { text-align: center; padding: 40px; color: var(--text-secondary); font-size: 0.95rem; }
+        .loading .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 32px 0;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 48px;
-        }
+        .placeholder-notice { background: #fef2f2; border: 1px dashed #fca5a5; border-radius: 8px; padding: 12px 16px; color: #991b1b; font-size: 0.85rem; text-align: center; margin-bottom: 20px; }
+
+        footer { text-align: center; padding: 32px 0; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 48px; }
 
         @media (max-width: 768px) {
             header h1 { font-size: 1.6rem; }
-            .audio-row { grid-template-columns: 1fr; }
             .refine-row { flex-direction: column; }
             .refine-row .arrow { transform: rotate(90deg); }
+            .emosp-table td audio { min-width: 120px; }
         }
     </style>
 </head>
@@ -271,7 +190,6 @@
 
 <div class="container">
 
-    <!-- Abstract -->
     <div class="abstract">
         <h2>Abstract</h2>
         <p>
@@ -279,7 +197,6 @@
         </p>
     </div>
 
-    <!-- Dynamic content loads here -->
     <div id="content">
         <div class="loading">
             <div class="spinner"></div>
@@ -295,13 +212,6 @@
 
 <script>
 (function() {
-    const SECTION_TITLES = {
-        'emotion':  'Emotion Control',
-        'global':   'Global Prosody (Speed & Pitch)',
-        'stress':   'Word-Level Stress',
-        'pause':    'Pause Insertion',
-        'refine':   'Refinement with Instruction'
-    };
 
     function escapeHtml(text) {
         const div = document.createElement('div');
@@ -309,97 +219,86 @@
         return div.innerHTML;
     }
 
-    function renderGenerationSample(sample) {
-        const block = document.createElement('div');
-        block.className = 'sample-block';
-
-        let html = `
-            <p class="sample-text">${escapeHtml(sample.text)}</p>
-            <div class="sample-instruction">
-                <strong>Instruction:</strong> ${escapeHtml(sample.instruction)}
-            </div>
-            <div class="audio-row">
-                <div class="audio-item">
-                    <div class="label">Prompt Speech</div>
-                    <audio controls preload="none" src="${escapeHtml(sample.prompt_audio)}"></audio>
-                </div>
-                <div class="audio-item">
-                    <div class="label">Output</div>
-                    <audio controls preload="none" src="${escapeHtml(sample.output_audio)}"></audio>
-                </div>
-            </div>
-        `;
-
-        block.innerHTML = html;
-        return block;
-    }
-
-    function renderRefinementSample(sample) {
-        const block = document.createElement('div');
-        block.className = 'sample-block';
-
-        let html = `
-            <p class="sample-text">${escapeHtml(sample.text)}</p>
-            <div class="sample-instruction">
-                <strong>Refine Instruction:</strong> ${escapeHtml(sample.instruction)}
-            </div>
-            <div class="refine-row">
-                <div class="audio-item">
-                    <div class="label before">Before Refinement</div>
-                    <audio controls preload="none" src="${escapeHtml(sample.before_audio)}"></audio>
-                </div>
-                <span class="arrow">→</span>
-                <div class="audio-item">
-                    <div class="label after">After Refinement</div>
-                    <audio controls preload="none" src="${escapeHtml(sample.after_audio)}"></audio>
-                </div>
-            </div>
-        `;
-
-        block.innerHTML = html;
-        return block;
-    }
-
-    function renderCategory(category, index) {
+    function renderEmospTable(category, sectionIndex) {
         const section = document.createElement('section');
 
-        const title = SECTION_TITLES[category.id] || category.title;
         section.innerHTML = `
-            <h2>${index + 1}. ${escapeHtml(title)}</h2>
+            <h2>${sectionIndex + 1}. ${escapeHtml(category.title)}</h2>
+            <p class="section-desc">${escapeHtml(category.description)}</p>
+            <div class="target-text">${escapeHtml(category.text)}</div>
+        `;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'emosp-table-wrap';
+
+        const controls = category.controls;
+        const emotions = category.emotions;
+        const grid = category.grid;
+
+        let html = '<table class="emosp-table"><thead><tr><th>Emotion</th>';
+        controls.forEach(c => {
+            html += `<th>${escapeHtml(c.short)}</th>`;
+        });
+        html += '</tr></thead><tbody>';
+
+        emotions.forEach(emo => {
+            html += '<tr>';
+            html += `<th><span class="emo-badge emo-${emo}">${emo}</span></th>`;
+            const emoGrid = grid[emo] || {};
+            controls.forEach(c => {
+                const audioSrc = emoGrid[c.id] || '';
+                if (audioSrc) {
+                    html += `<td><audio controls preload="none" src="${escapeHtml(audioSrc)}"></audio></td>`;
+                } else {
+                    html += '<td>—</td>';
+                }
+            });
+            html += '</tr>';
+        });
+
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+        section.appendChild(wrap);
+
+        return section;
+    }
+
+    function renderRefinementSection(category, sectionIndex) {
+        const section = document.createElement('section');
+
+        section.innerHTML = `
+            <h2>${sectionIndex + 1}. ${escapeHtml(category.title)}</h2>
             <p class="section-desc">${escapeHtml(category.description)}</p>
         `;
 
         const samples = category.samples || [];
 
-        // Check if samples are placeholder
-        const hasReal = samples.some(s => {
-            if (category.type === 'refinement') {
-                return s.before_audio && !s.before_audio.includes('[');
-            } else {
-                return s.output_audio && !s.output_audio.includes('[');
-            }
+        samples.forEach(sample => {
+            const block = document.createElement('div');
+            block.className = 'sample-block';
+            block.innerHTML = `
+                <p class="sample-text">${escapeHtml(sample.text)}</p>
+                <div class="sample-instruction">
+                    <strong>Refine Instruction:</strong> ${escapeHtml(sample.instruction)}
+                </div>
+                <div class="refine-row">
+                    <div class="audio-item">
+                        <div class="label before">Before Refinement</div>
+                        <audio controls preload="none" src="${escapeHtml(sample.before_audio)}"></audio>
+                    </div>
+                    <span class="arrow">→</span>
+                    <div class="audio-item">
+                        <div class="label after">After Refinement</div>
+                        <audio controls preload="none" src="${escapeHtml(sample.after_audio)}"></audio>
+                    </div>
+                </div>
+            `;
+            section.appendChild(block);
         });
-
-        if (samples.length === 0 || !hasReal) {
-            const notice = document.createElement('div');
-            notice.className = 'placeholder-notice';
-            const folder = category.id === 'global' ? 'global' : category.id;
-            notice.innerHTML = `⚠️ Audio samples coming soon — add WAV files to <code>samples/${folder}/</code> and update <code>samples.json</code>.`;
-            section.appendChild(notice);
-        } else {
-            samples.forEach(sample => {
-                if (category.type === 'refinement') {
-                    section.appendChild(renderRefinementSample(sample));
-                } else {
-                    section.appendChild(renderGenerationSample(sample));
-                }
-            });
-        }
 
         return section;
     }
 
-    // Load samples.json and render
     fetch('samples.json')
         .then(r => {
             if (!r.ok) throw new Error('Failed to load samples.json');
@@ -410,14 +309,18 @@
             container.innerHTML = '';
 
             (data.categories || []).forEach((cat, i) => {
-                container.appendChild(renderCategory(cat, i));
+                if (cat.type === 'emosp_table') {
+                    container.appendChild(renderEmospTable(cat, i));
+                } else if (cat.type === 'refinement') {
+                    container.appendChild(renderRefinementSection(cat, i));
+                }
             });
         })
         .catch(err => {
             const container = document.getElementById('content');
             container.innerHTML = `
                 <div class="placeholder-notice">
-                    ⚠️ Failed to load samples: ${escapeHtml(err.message)}
+                    ⚠️ Failed to load samples: ${err.message}
                 </div>
             `;
             console.error(err);

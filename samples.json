@@ -1,69 +1,67 @@
 {
   "categories": [
     {
-      "id": "emotion",
-      "title": "Emotion Control",
-      "description": "LoopTTS generates speech with target emotional expression guided by prosodic instructions.",
-      "type": "generation",
-      "samples": [
-        {
-          "id": "emo-1",
-          "text": "[Your sample text here]",
-          "instruction": "[e.g., Speak with a happy tone at moderate speed and high pitch.]",
-          "prompt_audio": "samples/emotion/emo1_prompt.wav",
-          "output_audio": "samples/emotion/emo1_output.wav"
+      "id": "emosp",
+      "title": "Emotional Fine-Grained Control with Refiner",
+      "description": "Given the same neutral text and an emotional speech prompt, the Refiner produces speech that simultaneously realizes the target emotion and applies fine-grained prosodic edits (word-level stress or pause insertion).",
+      "type": "emosp_table",
+      "text": "Listen closely, the same words can tell a very different story.",
+      "controls": [
+        {"id": "stress_same", "label": "Stress \"same\"", "short": "Stress: same"},
+        {"id": "stress_very", "label": "Stress \"very\"", "short": "Stress: very"},
+        {"id": "pause_words", "label": "Pause after \"words\"", "short": "Pause: words"},
+        {"id": "pause_different", "label": "Pause after \"different\"", "short": "Pause: different"}
+      ],
+      "emotions": ["neutral", "angry", "disgusted", "fearful", "happy", "sad", "surprised"],
+      "grid": {
+        "neutral": {
+          "stress_same": "samples/emosp/emosp_stress_same_neutral_p05_r3.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_neutral_p05_r3.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_neutral_p05_r2.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_neutral_p05_r2.wav"
+        },
+        "angry": {
+          "stress_same": "samples/emosp/emosp_stress_same_angry_p04_r3.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_angry_p04_r3.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_angry_p04_r2.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_angry_p04_r1.wav"
+        },
+        "disgusted": {
+          "stress_same": "samples/emosp/emosp_stress_same_disgusted_p03_r2.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_disgusted_p03_r2.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_disgusted_p03_r3.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_disgusted_p03_r3.wav"
+        },
+        "fearful": {
+          "stress_same": "samples/emosp/emosp_stress_same_fearful_p00_r2.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_fearful_p00_r2.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_fearful_p00_r0.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_fearful_p00_r4.wav"
+        },
+        "happy": {
+          "stress_same": "samples/emosp/emosp_stress_same_happy_p00_r4.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_happy_p00_r1.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_happy_p00_r1.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_happy_p00_r0.wav"
+        },
+        "sad": {
+          "stress_same": "samples/emosp/emosp_stress_same_sad_p04_r4.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_sad_p04_r4.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_sad_p04_r4.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_sad_p04_r3.wav"
+        },
+        "surprised": {
+          "stress_same": "samples/emosp/emosp_stress_same_surprised_ps1_r1.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_surprised_ps1_r3.wav",
+          "pause_words": "samples/emosp/emosp_pause_after-words_surprised_ps1_r2.wav",
+          "pause_different": "samples/emosp/emosp_pause_after-different_surprised_ps1_r3.wav"
         }
-      ]
-    },
-    {
-      "id": "global",
-      "title": "Global Prosody (Speed & Pitch)",
-      "description": "LoopTTS controls global prosodic attributes including speaking speed and pitch level.",
-      "type": "generation",
-      "samples": [
-        {
-          "id": "glob-1",
-          "text": "[Your sample text here]",
-          "instruction": "[e.g., Speak at a fast speed with high pitch.]",
-          "prompt_audio": "samples/global/glob1_prompt.wav",
-          "output_audio": "samples/global/glob1_output.wav"
-        }
-      ]
-    },
-    {
-      "id": "stress",
-      "title": "Word-Level Stress",
-      "description": "LoopTTS places emphasis on specific words as directed by the refine instruction.",
-      "type": "generation",
-      "samples": [
-        {
-          "id": "str-1",
-          "text": "[Your sample text here]",
-          "instruction": "[e.g., Stress the word 'never' and stress the word 'always'.]",
-          "prompt_audio": "samples/stress/str1_prompt.wav",
-          "output_audio": "samples/stress/str1_output.wav"
-        }
-      ]
-    },
-    {
-      "id": "pause",
-      "title": "Pause Insertion",
-      "description": "LoopTTS inserts deliberate pauses at specified positions to improve prosodic phrasing.",
-      "type": "generation",
-      "samples": [
-        {
-          "id": "pau-1",
-          "text": "[Your sample text here]",
-          "instruction": "[e.g., Insert a pause after 'however' and a pause after 'conclusion'.]",
-          "prompt_audio": "samples/pause/pau1_prompt.wav",
-          "output_audio": "samples/pause/pau1_output.wav"
-        }
-      ]
+      }
     },
     {
       "id": "refine",
       "title": "Refinement with Instruction",
-      "description": "LoopTTS refines a prosodically defective utterance using a structured refine instruction from the AudioLLM Judge, producing corrected speech while preserving speaker identity.",
+      "description": "The AudioLLM Judge diagnoses prosodic defects in the initial utterance and generates a structured refine instruction. The Refiner then corrects the speech accordingly, preserving speaker identity.",
       "type": "refinement",
       "samples": [
         {
@@ -86,7 +84,7 @@
           "instruction": "Speak with a Angry emotion. Specifically, stress the word 'slammed', stress the word 'shut', and stress the word 'end', insert a pause after 'end'.",
           "before_audio": "samples/refine/9_before.wav",
           "after_audio": "samples/refine/9_after.wav"
-        },        
+        },
         {
           "id": "5044_5044_30602_000045_000000",
           "text": "I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something.",
