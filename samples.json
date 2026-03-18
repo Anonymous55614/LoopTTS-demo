@@ -14,8 +14,8 @@
       "emotions": ["neutral", "angry", "disgusted", "fearful", "happy", "sad", "surprised"],
       "grid": {
         "neutral": {
-          "stress_same": "samples/emosp/emosp_stress_same_neutral_p05_r3.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_neutral_p05_r3.wav"
+          "stress_same": "samples/emosp/emosp_stress_same_neutral_p07_r2.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_neutral_p07_r3.wav"
         },
         "angry": {
           "stress_same": "samples/emosp/emosp_stress_same_angry_p04_r3.wav",
@@ -51,38 +51,38 @@
       "text": "Listen closely, the same words can tell a very different story.",
       "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
       "controls": [
-        {"id": "pause_words", "label": "Pause after 'words'", "short": "Pause after 'words'"},
-        {"id": "pause_different", "label": "Pause after 'different'", "short": "Pause after 'different'"}
+        {"id": "pause_after-words", "label": "Pause after 'words'", "short": "Pause after 'words'"},
+        {"id": "pause_after-different", "label": "Pause after 'different'", "short": "Pause after 'different'"}
       ],
       "emotions": ["neutral", "angry", "disgusted", "fearful", "happy", "sad", "surprised"],
       "grid": {
         "neutral": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_neutral_p05_r2.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_neutral_p05_r2.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_neutral_p07_r1.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_neutral_p07_r3.wav"
         },
         "angry": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_angry_p04_r2.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_angry_p04_r1.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_angry_p04_r2.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_angry_p04_r1.wav"
         },
         "disgusted": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_disgusted_p03_r1.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_disgusted_p03_r3.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_disgusted_p03_r1.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_disgusted_p03_r3.wav"
         },
         "fearful": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_fearful_p00_r0.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_fearful_p00_r4.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_fearful_p00_r0.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_fearful_p00_r4.wav"
         },
         "happy": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_happy_p00_r1.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_happy_p00_r0.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_happy_p00_r1.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_happy_p00_r0.wav"
         },
         "sad": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_sad_p04_r4.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_sad_p04_r3.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_sad_p04_r4.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_sad_p04_r3.wav"
         },
         "surprised": {
-          "pause_words": "samples/emosp/emosp_pause_after-words_surprised_ps1_r2.wav",
-          "pause_different": "samples/emosp/emosp_pause_after-different_surprised_ps1_r3.wav"
+          "pause_after-words": "samples/emosp/emosp_pause_after-words_surprised_ps1_r2.wav",
+          "pause_after-different": "samples/emosp/emosp_pause_after-different_surprised_ps1_r3.wav"
         }
       }
     },
