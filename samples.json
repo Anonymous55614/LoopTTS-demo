@@ -93,32 +93,53 @@
       "type": "refinement",
       "samples": [
         {
-          "id": "home_gpt4o_14121_fearful_coral",
+          "id": "refine_1",
           "text": "I've told you 100 times—don't open the door at night.",
           "instruction": "Speak with a Fearful emotion. Specifically, stress the word '100', insert a pause after 'times', stress the word 'don't', and stress the word 'night'.",
-          "before_audio": "samples/refine/1_before.wav",
-          "after_audio": "samples/refine/1_after.wav"
+          "before_audio": "samples/refine_1/1_before.wav",
+          "after_audio": "samples/refine_1/1_after.wav"
         },
         {
-          "id": "home_gpt4o_9966_sad_ash",
+          "id": "refine_2",
           "text": "The letter slipped from his grasp, a paper cut of bitter news.",
           "instruction": "Speak with a Sad emotion at a slow speed and low pitch. Specifically, stress the word 'slipped', insert a pause after 'grasp', and stress the word 'bitter'.",
-          "before_audio": "samples/refine/2_before.wav",
-          "after_audio": "samples/refine/2_after.wav"
+          "before_audio": "samples/refine_1/2_before.wav",
+          "after_audio": "samples/refine_1/2_after.wav"
         },
         {
-          "id": "home_gpt4o_523_angry_ash",
+          "id": "refine_9",
           "text": "The car door slammed shut, punctuating the end of the argument.",
           "instruction": "Speak with a Angry emotion. Specifically, stress the word 'slammed', stress the word 'shut', and stress the word 'end', insert a pause after 'end'.",
-          "before_audio": "samples/refine/9_before.wav",
-          "after_audio": "samples/refine/9_after.wav"
+          "before_audio": "samples/refine_1/9_before.wav",
+          "after_audio": "samples/refine_1/9_after.wav"
         },
         {
-          "id": "5044_5044_30602_000045_000000",
+          "id": "refine_10",
           "text": "I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something.",
           "instruction": "Specifically, stress the word 'understand', stress the word 'vexed', and insert a pause after 'Anne'.",
-          "before_audio": "samples/refine/ref1_before.wav",
-          "after_audio": "samples/refine/ref1_after.wav"
+          "before_audio": "samples/refine_1/10_before.wav",
+          "after_audio": "samples/refine_1/10_after.wav"
+        },
+        {
+          "id": "refine_12",
+          "text": "Upon trying her hand at painting, she discovered a natural talent within her.",
+          "instruction": "Speak with a Surprised emotion. Specifically, stress the word 'Upon', stress the word 'painting', stress the word 'discovered', and stress the word 'talent'.",
+          "before_audio": "samples/refine_1/12_before.wav",
+          "after_audio": "samples/refine_1/12_after.wav"
+        },
+        {
+          "id": "refine_13",
+          "text": "You've got to see this—it's even better than we imagined!",
+          "instruction": "Speak with a Happy emotion. Specifically, stress the word 'got', insert a pause after 'this', stress the word 'even', and stress the word 'better'.",
+          "before_audio": "samples/refine_1/13_before.wav",
+          "after_audio": "samples/refine_1/13_after.wav"
+        },
+        {
+          "id": "refine_14",
+          "text": "You expect me to eat this after seeing how it's prepared?",
+          "instruction": "Speak with a Disgusted emotion. Specifically, stress the word 'You', stress the word 'this', insert a pause after 'this', and stress the word 'prepared'.",
+          "before_audio": "samples/refine_1/14_before.wav",
+          "after_audio": "samples/refine_1/14_after.wav"
         }
       ]
     }
