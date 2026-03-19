@@ -133,23 +133,6 @@
         .emo-sad        { background: #eff6ff; color: #2563eb; }
         .emo-surprised  { background: #ecfdf5; color: #059669; }
 
-        /* Sub-section headings for stress / pause tables */
-        .emosp-sub-heading {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text);
-            margin: 28px 0 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .emosp-sub-heading:first-of-type {
-            margin-top: 16px;
-        }
-        .emosp-sub-heading .sub-icon {
-            font-size: 1.0rem;
-        }
-
         /* Refinement samples */
         .sample-block {
             background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
@@ -236,66 +219,56 @@
         return div.innerHTML;
     }
 
-    function renderEmospTableGroup(tables, sectionIndex) {
-        // Render a group of emosp_table entries (stress + pause) as one section
-        const first = tables[0];
+    function renderEmospTable(category, sectionIndex) {
         const section = document.createElement('section');
 
         section.innerHTML = `
-            <h2>${sectionIndex + 1}. Emotional Fine-Grained Control</h2>
-            <p class="section-desc">${escapeHtml(first.description)}</p>
-            <div class="target-text">${escapeHtml(first.text)}</div>
+            <h2>${sectionIndex + 1}. ${escapeHtml(category.title)}</h2>
+            <p class="section-desc">${escapeHtml(category.description)}</p>
+            <div class="target-text">${escapeHtml(category.text)}</div>
         `;
 
-        if (first.initial_audio) {
+        if (category.initial_audio) {
             const initDiv = document.createElement('div');
             initDiv.style.cssText = 'background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:16px;';
             initDiv.innerHTML = `
                 <span style="font-weight:600;color:var(--text-secondary);font-size:0.9rem;white-space:nowrap;">Initial Utterance</span>
-                <audio controls preload="none" src="${escapeHtml(first.initial_audio)}" style="flex:1;height:36px;"></audio>
+                <audio controls preload="none" src="${escapeHtml(category.initial_audio)}" style="flex:1;height:36px;"></audio>
             `;
             section.appendChild(initDiv);
         }
 
-        tables.forEach(cat => {
-            const heading = document.createElement('div');
-            heading.className = 'emosp-sub-heading';
-            const icon = cat.id.includes('stress') ? '🔊' : '⏸';
-            heading.innerHTML = `<span class="sub-icon">${icon}</span> ${escapeHtml(cat.title)}`;
-            section.appendChild(heading);
+        const wrap = document.createElement('div');
+        wrap.className = 'emosp-table-wrap';
 
-            const wrap = document.createElement('div');
-            wrap.className = 'emosp-table-wrap';
+        const controls = category.controls;
+        const emotions = category.emotions;
+        const grid = category.grid;
 
-            const controls = cat.controls;
-            const emotions = cat.emotions;
-            const grid = cat.grid;
-
-            let html = '<table class="emosp-table"><thead><tr><th>Emotion</th>';
-            controls.forEach(c => {
-                html += `<th>${escapeHtml(c.short)}</th>`;
-            });
-            html += '</tr></thead><tbody>';
-
-            emotions.forEach(emo => {
-                html += '<tr>';
-                html += `<th><span class="emo-badge emo-${emo}">${emo}</span></th>`;
-                const emoGrid = grid[emo] || {};
-                controls.forEach(c => {
-                    const audioSrc = emoGrid[c.id] || '';
-                    if (audioSrc) {
-                        html += `<td><audio controls preload="none" src="${escapeHtml(audioSrc)}"></audio></td>`;
-                    } else {
-                        html += '<td>—</td>';
-                    }
-                });
-                html += '</tr>';
-            });
-
-            html += '</tbody></table>';
-            wrap.innerHTML = html;
-            section.appendChild(wrap);
+        let html = '<table class="emosp-table"><thead><tr><th>Emotion</th>';
+        controls.forEach(c => {
+            html += `<th>${escapeHtml(c.short)}</th>`;
         });
+        html += '</tr></thead><tbody>';
+
+        emotions.forEach(emo => {
+            html += '<tr>';
+            html += `<th><span class="emo-badge emo-${emo}">${emo}</span></th>`;
+            const emoGrid = grid[emo] || {};
+            controls.forEach(c => {
+                const audioSrc = emoGrid[c.id] || '';
+                if (audioSrc) {
+                    html += `<td><audio controls preload="none" src="${escapeHtml(audioSrc)}"></audio></td>`;
+                } else {
+                    html += '<td>—</td>';
+                }
+            });
+            html += '</tr>';
+        });
+
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+        section.appendChild(wrap);
 
         return section;
     }
@@ -345,27 +318,14 @@
             const container = document.getElementById('content');
             container.innerHTML = '';
 
-            const cats = data.categories || [];
-            let sectionIdx = 0;
-            let i = 0;
-
-            while (i < cats.length) {
-                if (cats[i].type === 'emosp_table') {
-                    // Collect consecutive emosp_table entries
-                    const group = [];
-                    while (i < cats.length && cats[i].type === 'emosp_table') {
-                        group.push(cats[i]);
-                        i++;
-                    }
-                    container.appendChild(renderEmospTableGroup(group, sectionIdx));
-                    sectionIdx++;
-                } else if (cats[i].type === 'refinement') {
-                    container.appendChild(renderRefinementSection(cats[i], sectionIdx));
-                    sectionIdx++;
-                    i++;
-                } else {
-                    i++;
+            (data.categories || []).forEach((cat, i) => {
+                if (cat.type === 'emosp_table') {
+                    container.appendChild(renderEmospTable(cat, i));
+                } else if (cat.type === 'refinement') {
+                    container.appendChild(renderRefinementSection(cat, i));
                 }
+            });
+        })
             }
         })
         .catch(err => {

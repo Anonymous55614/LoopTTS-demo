@@ -1,86 +1,59 @@
 {
   "categories": [
     {
-      "id": "emosp_stress",
-      "title": "Emotional Stress Control",
-      "description": "Given the same neutral text and an emotional speech prompt, the Refiner produces speech that simultaneously realizes the target emotion and applies word-level stress.",
+      "id": "emosp",
+      "title": "Emotional Fine-Grained Control",
+      "description": "Given the same neutral text and an emotional speech prompt, the Refiner produces speech that simultaneously realizes the target emotion and applies fine-grained prosodic edits (word-level stress or pause insertion).",
       "type": "emosp_table",
       "text": "Listen closely, the same words can tell a very different story.",
       "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
       "controls": [
         {"id": "stress_same", "label": "Stress 'same'", "short": "Stress 'same'"},
-        {"id": "stress_very", "label": "Stress 'very'", "short": "Stress 'very'"}
-      ],
-      "emotions": ["neutral", "angry", "disgusted", "fearful", "happy", "sad", "surprised"],
-      "grid": {
-        "neutral": {
-          "stress_same": "samples/emosp/emosp_stress_same_neutral_p07_r2.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_neutral_p07_r3.wav"
-        },
-        "angry": {
-          "stress_same": "samples/emosp/emosp_stress_same_angry_p04_r3.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_angry_p04_r3.wav"
-        },
-        "disgusted": {
-          "stress_same": "samples/emosp/emosp_stress_same_disgusted_p03_r0.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_disgusted_p03_r2.wav"
-        },
-        "fearful": {
-          "stress_same": "samples/emosp/emosp_stress_same_fearful_p00_r2.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_fearful_p00_r2.wav"
-        },
-        "happy": {
-          "stress_same": "samples/emosp/emosp_stress_same_happy_p00_r4.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_happy_p00_r2.wav"
-        },
-        "sad": {
-          "stress_same": "samples/emosp/emosp_stress_same_sad_p04_r4.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_sad_p04_r4.wav"
-        },
-        "surprised": {
-          "stress_same": "samples/emosp/emosp_stress_same_surprised_ps1_r1.wav",
-          "stress_very": "samples/emosp/emosp_stress_very_surprised_ps1_r3.wav"
-        }
-      }
-    },
-    {
-      "id": "emosp_pause",
-      "title": "Emotional Pause Control",
-      "description": "Given the same neutral text and an emotional speech prompt, the Refiner produces speech that simultaneously realizes the target emotion and inserts a pause at the specified position.",
-      "type": "emosp_table",
-      "text": "Listen closely, the same words can tell a very different story.",
-      "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
-      "controls": [
+        {"id": "stress_very", "label": "Stress 'very'", "short": "Stress 'very'"},
         {"id": "pause_after-words", "label": "Pause after 'words'", "short": "Pause after 'words'"},
         {"id": "pause_after-different", "label": "Pause after 'different'", "short": "Pause after 'different'"}
       ],
       "emotions": ["neutral", "angry", "disgusted", "fearful", "happy", "sad", "surprised"],
       "grid": {
         "neutral": {
+          "stress_same": "samples/emosp/emosp_stress_same_neutral_p07_r2.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_neutral_p07_r3.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_neutral_p07_r1.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_neutral_p07_r3.wav"
         },
         "angry": {
+          "stress_same": "samples/emosp/emosp_stress_same_angry_p04_r3.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_angry_p04_r3.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_angry_p04_r2.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_angry_p04_r1.wav"
         },
         "disgusted": {
+          "stress_same": "samples/emosp/emosp_stress_same_disgusted_p03_r0.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_disgusted_p03_r2.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_disgusted_p03_r1.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_disgusted_p03_r3.wav"
         },
         "fearful": {
+          "stress_same": "samples/emosp/emosp_stress_same_fearful_p00_r2.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_fearful_p00_r2.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_fearful_p00_r0.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_fearful_p00_r4.wav"
         },
         "happy": {
+          "stress_same": "samples/emosp/emosp_stress_same_happy_p00_r4.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_happy_p00_r2.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_happy_p00_r1.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_happy_p00_r0.wav"
         },
         "sad": {
+          "stress_same": "samples/emosp/emosp_stress_same_sad_p04_r4.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_sad_p04_r4.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_sad_p04_r4.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_sad_p04_r3.wav"
         },
         "surprised": {
+          "stress_same": "samples/emosp/emosp_stress_same_surprised_ps1_r1.wav",
+          "stress_very": "samples/emosp/emosp_stress_very_surprised_ps1_r3.wav",
           "pause_after-words": "samples/emosp/emosp_pause_after-words_surprised_ps1_r2.wav",
           "pause_after-different": "samples/emosp/emosp_pause_after-different_surprised_ps1_r3.wav"
         }
