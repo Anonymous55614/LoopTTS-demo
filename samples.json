@@ -3,7 +3,7 @@
     {
       "id": "emosp",
       "title": "Emotional Fine-Grained Control",
-      "description": "Given the same neutral text and an emotional speech prompt, the Refiner produces speech that simultaneously realizes the target emotion and applies fine-grained prosodic edits (word-level stress or pause insertion).",
+      "description": "Starting from the same initial utterance, the Refiner re-synthesizes the speech to simultaneously convey the target emotion and apply a specified word-level prosodic edit (stress or pause insertion). Each row shares the same emotion; each column applies a different fine-grained control.",
       "type": "emosp_table",
       "text": "Listen closely, the same words can tell a very different story.",
       "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
@@ -62,10 +62,10 @@
     {
       "id": "sp_grid",
       "title": "Speed & Pitch Control",
-      "description": "Using the same text with a pause after 'words' and stress on 'very', the Refiner produces speech across 3 speed levels × 3 pitch levels. The initial utterance is shown first; each cell in the grid below is generated with the corresponding speed and pitch setting.",
+      "description": "Beyond emotion and word-level edits, the Refiner also controls global prosodic attributes. From the same initial utterance, it produces 9 variants spanning 3 speed levels and 3 pitch levels while consistently applying the specified stress and pause.",
       "type": "sp_grid",
       "text": "Listen closely, the same words can tell a very different story.",
-      "instruction": "Insert a pause after 'words' and stress the word 'very'.",
+      "instruction": "Speak at a {speed} speed and {pitch} pitch. Specifically, insert a pause after 'words' and stress the word 'very'.",
       "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
       "speeds": ["Slow", "Moderate", "Fast"],
       "pitches": ["Low", "Moderate", "High"],
@@ -90,7 +90,7 @@
     {
       "id": "refine",
       "title": "Refinement with Instruction",
-      "description": "The AudioLLM Judge diagnoses prosodic defects in the initial utterance and generates a structured refine instruction covering emotion, word-level stress/pause, and global speed/pitch. The Refiner then corrects the speech accordingly, preserving speaker identity.",
+      "description": "In the full LoopTTS pipeline, the AudioLLM Judge listens to the initial utterance, diagnoses prosodic defects, and automatically generates a structured refine instruction that may specify emotion, word-level stress/pause, speed, and pitch corrections. The Refiner then executes the instruction to produce the corrected speech while preserving speaker identity. Below are real Judge-generated instructions and the corresponding before/after pairs.",
       "type": "refinement",
       "samples": [
         {

@@ -162,6 +162,24 @@
             letter-spacing: 0.5px;
             margin-bottom: 6px;
         }
+        .sp-placeholder {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            font-family: 'Segoe UI', system-ui, monospace;
+        }
+        .sp-placeholder.speed {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
+        }
+        .sp-placeholder.pitch {
+            background: #fce7f3;
+            color: #be185d;
+            border: 1px solid #f9a8d4;
+        }
 
         /* Emotion color badges */
         .emo-badge {
@@ -328,10 +346,13 @@
             <div class="target-text">${escapeHtml(category.text)}</div>
         `;
 
-        /* Instruction block */
+        /* Instruction block — render {speed} and {pitch} as colored tags */
         const instrDiv = document.createElement('div');
         instrDiv.className = 'sample-instruction';
-        instrDiv.innerHTML = `<strong>Refine Instruction:</strong> ${escapeHtml(category.instruction)}`;
+        const instrHtml = escapeHtml(category.instruction)
+            .replace('{speed}', '<span class="sp-placeholder speed">{speed}</span>')
+            .replace('{pitch}', '<span class="sp-placeholder pitch">{pitch}</span>');
+        instrDiv.innerHTML = `<strong>Refine Instruction:</strong> ${instrHtml}`;
         instrDiv.style.marginBottom = '16px';
         section.appendChild(instrDiv);
 
@@ -356,13 +377,13 @@
 
         let html = '<table class="sp-grid-table">';
         /* header: Speed ↓  Pitch → | Low | Moderate | High */
-        html += '<thead><tr><th>Speed ↓ &nbsp;Pitch →</th>';
-        pitches.forEach(p => { html += `<th>${escapeHtml(p)} Pitch</th>`; });
+        html += '<thead><tr><th><span class="sp-placeholder speed" style="font-size:0.8rem;">Speed ↓</span>&nbsp;<span class="sp-placeholder pitch" style="font-size:0.8rem;">Pitch →</span></th>';
+        pitches.forEach(p => { html += `<th><span class="sp-placeholder pitch" style="border:none;background:transparent;color:white;font-size:0.82rem;">${escapeHtml(p)}</span></th>`; });
         html += '</tr></thead><tbody>';
 
         speeds.forEach(sp => {
             html += '<tr>';
-            html += `<th>${escapeHtml(sp)} Speed</th>`;
+            html += `<th><span class="sp-placeholder speed" style="border:none;">${escapeHtml(sp)}</span></th>`;
             const spGrid = grid[sp] || {};
             pitches.forEach(pt => {
                 const audioSrc = spGrid[pt] || '';
