@@ -378,7 +378,7 @@
         let html = '<table class="sp-grid-table">';
         /* header: Speed ↓  Pitch → | Low | Moderate | High */
         html += '<thead><tr><th><span class="sp-placeholder speed" style="font-size:0.8rem;">Speed ↓</span>&nbsp;<span class="sp-placeholder pitch" style="font-size:0.8rem;">Pitch →</span></th>';
-        pitches.forEach(p => { html += `<th><span class="sp-placeholder pitch" style="border:none;background:transparent;color:white;font-size:0.82rem;">${escapeHtml(p)}</span></th>`; });
+        pitches.forEach(p => { html += `<th><span class="sp-placeholder pitch" style="font-size:0.82rem;">${escapeHtml(p)}</span></th>`; });
         html += '</tr></thead><tbody>';
 
         speeds.forEach(sp => {
