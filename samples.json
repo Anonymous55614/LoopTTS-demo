@@ -60,6 +60,34 @@
       }
     },
     {
+      "id": "sp_grid",
+      "title": "Speed & Pitch Control",
+      "description": "Using the same text with a pause after 'words' and stress on 'very', the Refiner produces speech across 3 speed levels × 3 pitch levels. The initial utterance is shown first; each cell in the grid below is generated with the corresponding speed and pitch setting.",
+      "type": "sp_grid",
+      "text": "Listen closely, the same words can tell a very different story.",
+      "instruction": "Insert a pause after 'words' and stress the word 'very'.",
+      "initial_audio": "samples/emosp/emosp_neutral_p07_r0.wav",
+      "speeds": ["Slow", "Moderate", "Fast"],
+      "pitches": ["Low", "Moderate", "High"],
+      "grid": {
+        "Slow": {
+          "Low": "samples/emosp/sp_slow_low_r1.wav",
+          "Moderate": "samples/emosp/sp_slow_moderate_r2.wav",
+          "High": "samples/emosp/sp_slow_high_r4.wav"
+        },
+        "Moderate": {
+          "Low": "samples/emosp/sp_moderate_low_r1.wav",
+          "Moderate": "samples/emosp/sp_moderate_moderate_r4.wav",
+          "High": "samples/emosp/sp_moderate_high_r1.wav"
+        },
+        "Fast": {
+          "Low": "samples/emosp/sp_fast_low_r0.wav",
+          "Moderate": "samples/emosp/sp_fast_moderate_r1.wav",
+          "High": "samples/emosp/sp_fast_high_r3.wav"
+        }
+      }
+    },
+    {
       "id": "refine",
       "title": "Refinement with Instruction",
       "description": "The AudioLLM Judge diagnoses prosodic defects in the initial utterance and generates a structured refine instruction. The Refiner then corrects the speech accordingly, preserving speaker identity.",
@@ -124,51 +152,23 @@
       "type": "refinement",
       "samples": [
         {
-          "id": "sad_SP",
-          "text": "You promised you'd come back but look where we are now!",
-          "instruction": "Speak with a Sad emotion. Specifically, stress the word 'You', stress the word 'promised', insert a pause after 'back', stress the word 'look', and stress the word 'now'.",
-          "before_audio": "samples/Refine_SP/sad_SP_before.wav",
-          "after_audio": "samples/Refine_SP/sad_SP_after.wav"
-        },
-        {
           "id": "sad_SP_1",
           "text": "I know i messed up, but please don't leave—please.",
-          "instruction": "Speak with a Sad emotion. Specifically, stress the word 'i', insert a pause after 'up', stress the word 'please', and insert a pause after 'leave'.",
+          "instruction": "Speak with a Sad emotion at a slow speed and moderate pitch. Specifically, stress the word 'i', insert a pause after 'up', stress the word 'please', and insert a pause after 'leave'.",
           "before_audio": "samples/Refine_SP/sad_SP_before_1.wav",
           "after_audio": "samples/Refine_SP/sad_SP_after_1.wav"
         },
         {
-          "id": "surprised_SP",
-          "text": "You bought a car without telling me first? That's... A bit unexpected.",
-          "instruction": "Speak with a Surprised emotion. Specifically, stress the word 'bought', stress the word 'first?', and insert a pause after 'That's...'.",
-          "before_audio": "samples/Refine_SP/suprised_SP_before.wav",
-          "after_audio": "samples/Refine_SP/suprised_SP_after.wav"
-        },
-        {
-          "id": "happy_SP",
-          "text": "We danced under the stars, losing ourselves in sheer delight.",
-          "instruction": "Speak with a Happy emotion. Specifically, stress the word 'danced', stress the word 'stars', insert a pause after 'stars', stress the word 'sheer', and stress the word 'delight'.",
-          "before_audio": "samples/Refine_SP/happy_SP_before.wav",
-          "after_audio": "samples/Refine_SP/happy_SP_after.wav"
-        },
-        {
           "id": "angry_SP",
           "text": "Do you really believe your silence is more tolerable than an honest mistake?",
-          "instruction": "Speak with a Angry emotion. Specifically, stress the word 'really', stress the word 'silence', fix the stress of tolerable, and stress the word 'honest'.",
+          "instruction": "Speak with a Angry emotion at a fast speed and moderate pitch. Specifically, stress the word 'really', stress the word 'silence', fix the stress of tolerable, and stress the word 'honest'.",
           "before_audio": "samples/Refine_SP/angry_SP_before.wav",
           "after_audio": "samples/Refine_SP/angry_SP_after.wav"
         },
         {
-          "id": "disgusted_SP",
-          "text": "That room smells as though something curled up and gave up half a life.",
-          "instruction": "Speak with a Disgusted emotion. Specifically, stress the word 'smells', stress the word 'curled', insert a pause after 'up', and stress the word 'half'.",
-          "before_audio": "samples/Refine_SP/disgusted_SP_before.wav",
-          "after_audio": "samples/Refine_SP/disgusted_SP_after.wav"
-        },
-        {
           "id": "fearful_SP",
           "text": "I—i swear i wasn't alone down there! You have to believe me this time.",
-          "instruction": "Speak with a Fearful emotion. Specifically, insert a pause after 'I—i', stress the word 'swear', stress the word 'wasn't', insert a pause after 'there!', and stress the word 'have'.",
+          "instruction": "Speak with a Fearful emotion at a moderate speed and low pitch. Specifically, insert a pause after 'I—i', stress the word 'swear', stress the word 'wasn't', insert a pause after 'there!', and stress the word 'have'.",
           "before_audio": "samples/Refine_SP/fearful_SP_before.wav",
           "after_audio": "samples/Refine_SP/fearful_SP_after.wav"
         }

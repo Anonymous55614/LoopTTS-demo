@@ -117,6 +117,52 @@
             height: 32px;
         }
 
+        /* SP Grid — speed × pitch 九宫格 */
+        .sp-grid-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .sp-grid-table th, .sp-grid-table td {
+            padding: 10px 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .sp-grid-table thead th {
+            background: linear-gradient(135deg, #1e3a5f, #2563eb);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .sp-grid-table thead th:first-child {
+            background: #1e3a5f;
+            min-width: 90px;
+        }
+        .sp-grid-table tbody th {
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 90px;
+        }
+        .sp-grid-table td audio {
+            width: 100%;
+            min-width: 160px;
+            height: 32px;
+        }
+        .sp-axis-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
         /* Emotion color badges */
         .emo-badge {
             display: inline-block;
@@ -273,6 +319,69 @@
         return section;
     }
 
+    function renderSpGrid(category, sectionIndex) {
+        const section = document.createElement('section');
+
+        section.innerHTML = `
+            <h2>${sectionIndex + 1}. ${escapeHtml(category.title)}</h2>
+            <p class="section-desc">${escapeHtml(category.description)}</p>
+            <div class="target-text">${escapeHtml(category.text)}</div>
+        `;
+
+        /* Instruction block */
+        const instrDiv = document.createElement('div');
+        instrDiv.className = 'sample-instruction';
+        instrDiv.innerHTML = `<strong>Refine Instruction:</strong> ${escapeHtml(category.instruction)}`;
+        instrDiv.style.marginBottom = '16px';
+        section.appendChild(instrDiv);
+
+        /* Initial utterance */
+        if (category.initial_audio) {
+            const initDiv = document.createElement('div');
+            initDiv.style.cssText = 'background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:16px;';
+            initDiv.innerHTML = `
+                <span style="font-weight:600;color:var(--text-secondary);font-size:0.9rem;white-space:nowrap;">Initial Utterance</span>
+                <audio controls preload="none" src="${escapeHtml(category.initial_audio)}" style="flex:1;height:36px;"></audio>
+            `;
+            section.appendChild(initDiv);
+        }
+
+        /* Speed × Pitch grid table */
+        const speeds = category.speeds;   // rows
+        const pitches = category.pitches;  // columns
+        const grid = category.grid;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'emosp-table-wrap';
+
+        let html = '<table class="sp-grid-table">';
+        /* header: Speed ↓  Pitch → | Low | Moderate | High */
+        html += '<thead><tr><th>Speed ↓ &nbsp;Pitch →</th>';
+        pitches.forEach(p => { html += `<th>${escapeHtml(p)} Pitch</th>`; });
+        html += '</tr></thead><tbody>';
+
+        speeds.forEach(sp => {
+            html += '<tr>';
+            html += `<th>${escapeHtml(sp)} Speed</th>`;
+            const spGrid = grid[sp] || {};
+            pitches.forEach(pt => {
+                const audioSrc = spGrid[pt] || '';
+                if (audioSrc) {
+                    html += `<td><audio controls preload="none" src="${escapeHtml(audioSrc)}"></audio></td>`;
+                } else {
+                    html += '<td>—</td>';
+                }
+            });
+            html += '</tr>';
+        });
+
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+        section.appendChild(wrap);
+
+        return section;
+    }
+
     function renderRefinementSection(category, sectionIndex) {
         const section = document.createElement('section');
 
@@ -321,6 +430,8 @@
             (data.categories || []).forEach((cat, i) => {
                 if (cat.type === 'emosp_table') {
                     container.appendChild(renderEmospTable(cat, i));
+                } else if (cat.type === 'sp_grid') {
+                    container.appendChild(renderSpGrid(cat, i));
                 } else if (cat.type === 'refinement') {
                     container.appendChild(renderRefinementSection(cat, i));
                 }
