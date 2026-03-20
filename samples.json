@@ -103,7 +103,7 @@
         {
           "id": "angry_SP",
           "text": "Do you really believe your silence is more tolerable than an honest mistake?",
-          "instruction": "Speak with a Angry emotion at a fast speed and moderate pitch. Specifically, stress the word 'really', stress the word 'silence', fix the stress of tolerable, and stress the word 'honest'.",
+          "instruction": "Speak with a Angry emotion at a fast speed and moderate pitch. Specifically, stress the word 'really', stress the word 'silence', and stress the word 'honest'.",
           "before_audio": "samples/Refine_SP/angry_SP_before.wav",
           "after_audio": "samples/Refine_SP/angry_SP_after.wav"
         },
@@ -124,28 +124,21 @@
         {
           "id": "fearful_SP",
           "text": "I—i swear i wasn't alone down there! You have to believe me this time.",
-          "instruction": "Speak with a Fearful emotion at a moderate speed and low pitch. Specifically, insert a pause after 'I—i', stress the word 'swear', stress the word 'wasn't', insert a pause after 'there!', and stress the word 'have'.",
+          "instruction": "Speak with a Fearful emotion at a moderate speed and low pitch. Specifically, stress the word 'swear', insert a pause after 'swear', stress the word 'wasn't', insert a pause after 'there!', and stress the word 'believe'.",
           "before_audio": "samples/Refine_SP/fearful_SP_before.wav",
           "after_audio": "samples/Refine_SP/fearful_SP_after.wav"
         },
         {
           "id": "refine_13",
           "text": "You've got to see this—it's even better than we imagined!",
-          "instruction": "Speak with a Happy emotion. Specifically, stress the word 'got', insert a pause after 'this', stress the word 'even', and stress the word 'better'.",
+          "instruction": "Speak with a Happy emotion. Specifically, stress the word 'got', insert a pause after 'this', stress the word 'even', and stress the word 'imagined'.",
           "before_audio": "samples/refine_1/13_before.wav",
           "after_audio": "samples/refine_1/13_after.wav"
         },
         {
-          "id": "refine_10",
-          "text": "I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something.",
-          "instruction": "Specifically, stress the word 'understand', stress the word 'vexed', and insert a pause after 'Anne'.",
-          "before_audio": "samples/refine_1/10_before.wav",
-          "after_audio": "samples/refine_1/10_after.wav"
-        },
-        {
           "id": "refine_2",
           "text": "The letter slipped from his grasp, a paper cut of bitter news.",
-          "instruction": "Speak with a Sad emotion at a slow speed and low pitch. Specifically, stress the word 'slipped', insert a pause after 'grasp', and stress the word 'bitter'.",
+          "instruction": "Speak with a Sad emotion at a low pitch. Specifically, stress the word 'slipped', insert a pause after 'grasp', and stress the word 'bitter'.",
           "before_audio": "samples/refine_1/2_before.wav",
           "after_audio": "samples/refine_1/2_after.wav"
         },
@@ -159,9 +152,16 @@
         {
           "id": "refine_12",
           "text": "Upon trying her hand at painting, she discovered a natural talent within her.",
-          "instruction": "Speak with a Surprised emotion at a slow speed. Specifically, stress the word 'Upon', stress the word 'painting', stress the word 'discovered', and stress the word 'talent'.",
+          "instruction": "Speak with a Surprised emotion at a slow speed. Specifically, stress the word 'painting', insert a pause after 'painting', stress the word 'natural', and stress the word 'talent'.",
           "before_audio": "samples/refine_1/12_before.wav",
           "after_audio": "samples/refine_1/12_after.wav"
+        },
+        {
+          "id": "refine_10",
+          "text": "I don't just understand you, Anne,' he said hesitatingly. 'You appear to be vexed about something.",
+          "instruction": "Speak at a fast speed. Specifically, stress the word 'understand', stress the word 'vexed', and insert a pause after 'Anne'.",
+          "before_audio": "samples/refine_1/10_before.wav",
+          "after_audio": "samples/refine_1/10_after.wav"
         }
       ]
     }
